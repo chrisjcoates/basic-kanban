@@ -1,9 +1,26 @@
+import { useState } from 'react';
+
+import TaskModal from './components/TaskModal';
+
 const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openTaskModal = () => {
+    setIsModalOpen((prev) => (prev = true));
+  };
+
+  const closeTaskModal = () => {
+    setIsModalOpen((prev) => (prev = false));
+  };
+
   return (
     <div className='p-4'>
       <h2 className='text-center mb-3'>Basic Kanban</h2>
       <div className='flex justify-between'>
-        <button className='bg-green-600 mb-3 p-1 text-white rounded px-2 hover:bg-green-700 active:bg-green-600'>
+        <button
+          onClick={openTaskModal}
+          className='bg-green-600 mb-3 p-1 text-white rounded px-2 hover:bg-green-700 active:bg-green-600'
+        >
           Add
         </button>
         <button className='bg-red-600 mb-3 p-1 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 '>
@@ -15,6 +32,9 @@ const App = () => {
         <div className='bg-orange-400'>Work in progress</div>
         <div className='bg-green-400'>Completed</div>
       </div>
+
+      {/* Task Modal */}
+      <TaskModal isOpen={isModalOpen} closeModal={closeTaskModal} />
     </div>
   );
 };
