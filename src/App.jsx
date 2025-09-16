@@ -16,15 +16,15 @@ const App = () => {
 
   return (
     <div className='p-4'>
-      <h2 className='text-center mb-3'>Basic Kanban</h2>
+      <h1 className='text-center mb-3 font-semibold text-4xl'>Basic Kanban</h1>
       <div className='flex justify-between'>
         <button
           onClick={openTaskModal}
-          className='bg-green-600 mb-3 p-1 text-white rounded px-2 hover:bg-green-700 active:bg-green-600 cursor-pointer'
+          className='bg-green-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-green-700 active:bg-green-600 cursor-pointer'
         >
           Add
         </button>
-        <button className='bg-red-600 mb-3 p-1 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'>
+        <button className='bg-red-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'>
           Reset
         </button>
       </div>
