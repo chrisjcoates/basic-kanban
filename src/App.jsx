@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-import TaskModal from './components/TaskModal';
+import Modal from './components/Modal';
+import TaskForm from './components/TaskForm';
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,11 +20,11 @@ const App = () => {
       <div className='flex justify-between'>
         <button
           onClick={openTaskModal}
-          className='bg-green-600 mb-3 p-1 text-white rounded px-2 hover:bg-green-700 active:bg-green-600'
+          className='bg-green-600 mb-3 p-1 text-white rounded px-2 hover:bg-green-700 active:bg-green-600 cursor-pointer'
         >
           Add
         </button>
-        <button className='bg-red-600 mb-3 p-1 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 '>
+        <button className='bg-red-600 mb-3 p-1 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'>
           Reset
         </button>
       </div>
@@ -34,7 +35,9 @@ const App = () => {
       </div>
 
       {/* Task Modal */}
-      <TaskModal isOpen={isModalOpen} closeModal={closeTaskModal} />
+      <Modal title='New Task' isOpen={isModalOpen} closeModal={closeTaskModal}>
+        <TaskForm />
+      </Modal>
     </div>
   );
 };
