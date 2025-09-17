@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const Modal = ({ isOpen, closeModal, title, children, onSubmit }) => {
   if (!isOpen) return null;
 
