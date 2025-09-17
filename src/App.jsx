@@ -72,6 +72,10 @@ const App = () => {
     closeUtilityModal();
   };
 
+  const resetKanban = () => {
+    setTasks((prev) => (prev = []));
+  };
+
   const openUtilityModal = (task) => {
     setIsUtilityModalOpen((prev) => (prev = true));
     setOpentaskId((prev) => (prev = task.id));
@@ -96,7 +100,10 @@ const App = () => {
           <h2 className='mr-3 pt-1'>{`${
             tasks.filter((task) => task.status === 'Completed').length
           }/${tasks.length}`}</h2>
-          <button className='bg-red-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'>
+          <button
+            onClick={resetKanban}
+            className='bg-red-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'
+          >
             Reset
           </button>
         </div>
