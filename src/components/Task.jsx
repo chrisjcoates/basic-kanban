@@ -12,14 +12,14 @@ const Task = ({ task, onClick, taskId }) => {
   };
 
   const activeBorder =
-    task.id === taskId ? 'border-2 border-dashed border-red-600' : '';
+    task.id === taskId
+      ? 'border-2 border-dashed border-yellow-500'
+      : 'border-l-10';
   return (
     <div
       className={`p-4 mb-4 rounded-lg shadow-md min-h-30 ${
         colorClasses[task.status]
-      } cursor-pointer ${activeBorder} border-l-10 ${
-        priorityBorderColor[task.priority]
-      }`}
+      } cursor-pointer ${activeBorder} ${priorityBorderColor[task.priority]}`}
       onClick={onClick}
     >
       <h2 className='font-semibold text-gray-300'>{task.description}</h2>
