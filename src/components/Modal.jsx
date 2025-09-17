@@ -5,7 +5,7 @@ const Modal = ({ isOpen, closeModal, title, children, onSubmit }) => {
 
   return (
     <div className='fixed inset-0 bg-black/50 z-40'>
-      <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white p-4 shadow-lg rounded-lg pl-0 w-100 h-100 flex flex-col justify-between'>
+      <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white p-4 shadow-lg rounded-lg pl-0 w-100 flex flex-col justify-between'>
         {/* header */}
         <div>
           <div className='flex justify-between mb-3'>
