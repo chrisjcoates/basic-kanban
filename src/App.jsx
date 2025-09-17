@@ -96,7 +96,7 @@ const App = () => {
           Reset
         </button>
       </div>
-      <div className='grid grid-cols-3 gap-10 text-center'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-10 text-center'>
         <div className=''>
           <h2 className='mb-3 font-semibold'>Backlog</h2>
           {tasks
