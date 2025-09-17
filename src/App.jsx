@@ -92,9 +92,14 @@ const App = () => {
         >
           Add
         </button>
-        <button className='bg-red-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'>
-          Reset
-        </button>
+        <div className='flex flex-row'>
+          <h2 className='mr-3 pt-1'>{`${
+            tasks.filter((task) => task.status === 'Completed').length
+          }/${tasks.length}`}</h2>
+          <button className='bg-red-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'>
+            Reset
+          </button>
+        </div>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-10 text-center'>
         <div className=''>
