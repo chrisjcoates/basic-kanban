@@ -1,4 +1,6 @@
-const Modal = ({ isOpen, closeModal, title, children }) => {
+import { useState } from 'react';
+
+const Modal = ({ isOpen, closeModal, title, children, onSubmit }) => {
   if (!isOpen) return null;
 
   return (
@@ -31,7 +33,10 @@ const Modal = ({ isOpen, closeModal, title, children }) => {
             >
               Close
             </button>
-            <button className='bg-sky-600 py-1 px-3 text-white rounded  hover:bg-sky-700 cursor-pointer'>
+            <button
+              onClick={onSubmit}
+              className='bg-sky-600 py-1 px-3 text-white rounded  hover:bg-sky-700 cursor-pointer'
+            >
               Submit
             </button>
           </div>
