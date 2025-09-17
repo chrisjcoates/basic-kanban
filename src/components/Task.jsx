@@ -5,16 +5,24 @@ const Task = ({ task, onClick, taskId }) => {
     Completed: 'bg-green-500/50 hover:bg-green-600/50',
   };
 
+  const priorityBorderColor = {
+    High: 'border-red-500',
+    Medium: 'border-yellow-500',
+    Low: 'border-green-500',
+  };
+
   const activeBorder =
     task.id === taskId ? 'border-2 border-dashed border-red-600' : '';
   return (
     <div
       className={`p-4 mb-4 rounded-lg shadow-md min-h-30 ${
         colorClasses[task.status]
-      } cursor-pointer ${activeBorder}`}
+      } cursor-pointer ${activeBorder} border-l-10 ${
+        priorityBorderColor[task.priority]
+      }`}
       onClick={onClick}
     >
-      <h2 className='font-semibold'>{task.description}</h2>
+      <h2 className='font-semibold text-gray-300'>{task.description}</h2>
     </div>
   );
 };
