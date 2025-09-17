@@ -5,6 +5,12 @@ import TaskForm from './components/TaskForm';
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tasks, setTasks] = useState([]);
+  const [taskData, setTaskData] = useState({
+    description: '',
+    priority: 'Medium',
+    status: 'Backlog',
+  });
 
   const openTaskModal = () => {
     setIsModalOpen((prev) => (prev = true));
@@ -12,6 +18,22 @@ const App = () => {
 
   const closeTaskModal = () => {
     setIsModalOpen((prev) => (prev = false));
+  };
+
+  const onModalSubmit = (e) => {
+    e.preventDefault();
+
+    const newTask = { id: Date.now(), ...taskData };
+
+    setTasks([newTask, ...tasks]);
+
+    setTaskData({
+      description: '',
+      priority: 'Medium',
+      status: 'Backlog',
+    });
+
+    closeTaskModal();
   };
 
   return (
@@ -28,15 +50,37 @@ const App = () => {
           Reset
         </button>
       </div>
-      <div className='columns-3 text-center'>
-        <div className='bg-red-400'>Backlog</div>
-        <div className='bg-orange-400'>Work in progress</div>
-        <div className='bg-green-400'>Completed</div>
+      <div className='grid grid-cols-3 gap-4 text-center'>
+        <div className='bg-red-400'>
+          <h2 className='font-semibold'>Backlog</h2>
+          {tasks
+            .filter((task) => task.status === 'Backlog')
+            .map((task) => {
+              return (
+                <div className='flex ' key={task.id}>
+                  {task.description}
+                </div>
+              );
+            })}
+        </div>
+        <div className='bg-orange-400'>
+          <h2>Work in progress</h2>
+          <div>test</div>
+        </div>
+        <div className='bg-green-400'>
+          <h2>Completed</h2>
+          <div>test</div>
+        </div>
       </div>
 
       {/* Task Modal */}
-      <Modal title='New Task' isOpen={isModalOpen} closeModal={closeTaskModal}>
-        <TaskForm />
+      <Modal
+        title='New Task'
+        isOpen={isModalOpen}
+        closeModal={closeTaskModal}
+        onSubmit={onModalSubmit}
+      >
+        <TaskForm formData={taskData} setFormData={setTaskData} />
       </Modal>
     </div>
   );
