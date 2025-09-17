@@ -88,21 +88,23 @@ const App = () => {
 
   return (
     <div className='max-w-6xl mx-auto mt-10 p-6'>
-      <h1 className='text-center mb-3 font-semibold text-4xl'>Basic Kanban</h1>
+      <h1 className='text-center mb-3 font-bold text-4xl text-gray-300'>
+        Basic Kanban
+      </h1>
       <div className='flex justify-between'>
         <button
           onClick={openTaskModal}
-          className='bg-green-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-green-700 active:bg-green-600 cursor-pointer'
+          className='bg-green-600 mb-3 py-1 px-3 text-white rounded shadow-lg px-2 hover:bg-green-700 active:bg-green-600 cursor-pointer'
         >
           Add
         </button>
         <div className='flex flex-row'>
-          <h2 className='mr-3 pt-1'>{`${
+          <h2 className='mr-3 pt-1 font-semibold text-gray-300'>{`${
             tasks.filter((task) => task.status === 'Completed').length
           }/${tasks.length}`}</h2>
           <button
             onClick={resetKanban}
-            className='bg-red-600 mb-3 py-1 px-3 text-white rounded px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'
+            className='bg-red-600 mb-3 py-1 px-3 text-white rounded shadow-lg px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'
           >
             Reset
           </button>
@@ -110,7 +112,7 @@ const App = () => {
       </div>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-10 text-center'>
         <div className=''>
-          <h2 className='mb-3 font-semibold'>Backlog</h2>
+          <h2 className='mb-3 font-semibold text-gray-300'>Backlog</h2>
           {tasks
             .filter((task) => task.status === 'Backlog')
             .map((task) => {
@@ -126,7 +128,7 @@ const App = () => {
             })}
         </div>
         <div className=''>
-          <h2 className='mb-3 font-semibold'>Work in progress</h2>
+          <h2 className='mb-3 font-semibold text-gray-300'>Work in progress</h2>
           {tasks
             .filter((task) => task.status === 'Work in progress')
             .map((task) => {
@@ -142,7 +144,7 @@ const App = () => {
             })}
         </div>
         <div className=''>
-          <h2 className='mb-3 font-semibold'>Completed</h2>
+          <h2 className='mb-3 font-semibold text-gray-300'>Completed</h2>
           {tasks
             .filter((task) => task.status === 'Completed')
             .map((task) => {
