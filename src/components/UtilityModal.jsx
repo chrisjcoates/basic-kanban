@@ -1,4 +1,4 @@
-const UtilityModal = ({ isOpen, onEditClick }) => {
+const UtilityModal = ({ isOpen, onEditClick, onCloseClick, onDeleteClick }) => {
   if (!isOpen) return null;
 
   return (
@@ -10,8 +10,17 @@ const UtilityModal = ({ isOpen, onEditClick }) => {
         >
           Edit
         </button>
-        <button className='py-1 w-full bg-red-600 text-white hover:bg-red-700 rounded cursor-pointer'>
+        <button
+          onClick={onDeleteClick}
+          className='py-1 mr-3 w-full bg-red-600 text-white hover:bg-red-700 rounded cursor-pointer'
+        >
           Delete
+        </button>
+        <button
+          onClick={onCloseClick}
+          className='py-1 w-full bg-gray-600 text-white hover:bg-gray-700 rounded cursor-pointer'
+        >
+          Close
         </button>
       </div>
     </div>
