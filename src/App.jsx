@@ -2,9 +2,13 @@ import { useState } from 'react';
 
 import Modal from './components/Modal';
 import TaskForm from './components/TaskForm';
+import Task from './components/Task';
+import UtilityModal from './components/UtilityModal';
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUtilityModalOpen, setIsUtilityModalOpen] = useState(false);
+  const [openTaskId, setOpentaskId] = useState(0);
   const [tasks, setTasks] = useState([]);
   const [taskData, setTaskData] = useState({
     description: '',
@@ -13,19 +17,45 @@ const App = () => {
   });
 
   const openTaskModal = () => {
+    isUtilityModalOpen && closeUtilityModal();
+
+    if (openTaskId) {
+      const selectedTask = tasks.filter((task) => task.id === openTaskId);
+
+      setTaskData({
+        ...selectedTask[0],
+      });
+    }
+
     setIsModalOpen((prev) => (prev = true));
   };
 
   const closeTaskModal = () => {
+    if (openTaskId) setOpentaskId((prev) => (prev = 0));
+
+    setTaskData({
+      description: '',
+      priority: 'Medium',
+      status: 'Backlog',
+    });
+
     setIsModalOpen((prev) => (prev = false));
   };
 
   const onModalSubmit = (e) => {
     e.preventDefault();
 
-    const newTask = { id: Date.now(), ...taskData };
-
-    setTasks([newTask, ...tasks]);
+    if (openTaskId) {
+      setTasks(
+        tasks.map((task) =>
+          task.id === openTaskId ? { ...task, ...taskData } : task
+        )
+      );
+      setOpentaskId((prev) => (prev = 0));
+    } else {
+      const newTask = { id: Date.now(), ...taskData };
+      setTasks([newTask, ...tasks]);
+    }
 
     setTaskData({
       description: '',
@@ -36,8 +66,17 @@ const App = () => {
     closeTaskModal();
   };
 
+  const openUtilityModal = (task) => {
+    setIsUtilityModalOpen((prev) => (prev = true));
+    setOpentaskId((prev) => (prev = task.id));
+  };
+
+  const closeUtilityModal = () => {
+    setIsUtilityModalOpen((prev) => (prev = false));
+  };
+
   return (
-    <div className='p-4'>
+    <div className='max-w-6xl mx-auto mt-10 p-6'>
       <h1 className='text-center mb-3 font-semibold text-4xl'>Basic Kanban</h1>
       <div className='flex justify-between'>
         <button
@@ -50,26 +89,54 @@ const App = () => {
           Reset
         </button>
       </div>
-      <div className='grid grid-cols-3 gap-4 text-center'>
-        <div className='bg-red-400'>
-          <h2 className='font-semibold'>Backlog</h2>
+      <div className='grid grid-cols-3 gap-10 text-center'>
+        <div className=''>
+          <h2 className='mb-3 font-semibold'>Backlog</h2>
           {tasks
             .filter((task) => task.status === 'Backlog')
             .map((task) => {
               return (
-                <div className='flex ' key={task.id}>
-                  {task.description}
-                </div>
+                <Task
+                  key={task.id}
+                  task={task}
+                  taskId={openTaskId}
+                  onClick={() => openUtilityModal(task)}
+                  openTaskId={openTaskId}
+                />
               );
             })}
         </div>
-        <div className='bg-orange-400'>
-          <h2>Work in progress</h2>
-          <div>test</div>
+        <div className=''>
+          <h2 className='mb-3 font-semibold'>Work in progress</h2>
+          {tasks
+            .filter((task) => task.status === 'Work in progress')
+            .map((task) => {
+              return (
+                <Task
+                  key={task.id}
+                  task={task}
+                  taskId={openTaskId}
+                  onClick={() => openUtilityModal(task)}
+                  openTaskId={openTaskId}
+                />
+              );
+            })}
         </div>
-        <div className='bg-green-400'>
-          <h2>Completed</h2>
-          <div>test</div>
+        <div className=''>
+          <h2 className='mb-3 font-semibold'>Completed</h2>
+          {tasks
+            .filter((task) => task.status === 'Completed')
+            .map((task) => {
+              return (
+                <Task
+                  key={task.id}
+                  task={task}
+                  taskId={openTaskId}
+                  onClick={() => openUtilityModal(task)}
+                  openTaskId={openTaskId}
+                />
+              );
+            })}
         </div>
       </div>
 
@@ -80,8 +147,15 @@ const App = () => {
         closeModal={closeTaskModal}
         onSubmit={onModalSubmit}
       >
-        <TaskForm formData={taskData} setFormData={setTaskData} />
+        <TaskForm
+          formData={taskData}
+          setFormData={setTaskData}
+          openTaskId={openTaskId}
+        />
       </Modal>
+
+      {/* Utility Modal */}
+      <UtilityModal isOpen={isUtilityModalOpen} onEditClick={openTaskModal} />
     </div>
   );
 };
