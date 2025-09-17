@@ -1,12 +1,39 @@
-# React + Vite
+# Basic Kanban
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Kanban board application built with React.  
+Users can create, edit, update, and delete tasks. Each task can be moved between the three status columns — **Backlog**, **Work in Progress**, and **Completed** — providing a lightweight way to manage work items.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Add tasks** to the backlog
+- **Edit tasks** (update description, priority, or status)
+- **Move tasks** between columns by updating their status
+- **Delete tasks** when no longer needed
+- **Reset all tasks** to rest the board
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16 or later recommended)
+- npm or yarn package manager
+
+---
+
+## Installation & Running Locally
+
+1. **Clone the repository**
+2. **cd basic-kanban**
+3. **Install dependencies**
+
+```bash
+npm i
+```
+
+4. **_Start the development server_**
+
+```bash
+npm run dev
+```
