@@ -1,4 +1,4 @@
-const TaskForm = ({ formData, setFormData }) => {
+const TaskForm = ({ formData, setFormData, openTaskId }) => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -32,6 +32,21 @@ const TaskForm = ({ formData, setFormData }) => {
           <option value='Low'>Low</option>
         </select>
       </div>
+      {openTaskId ? (
+        <div className='mb-3'>
+          <label htmlFor='status'>Status</label>
+          <select
+            className='w-full p-2 border border-gray-400 rounded-lg'
+            name='status'
+            value={formData.status}
+            onChange={handleChange}
+          >
+            <option value='Backlog'>Backlog</option>
+            <option value='Work in progress'>Work in progress</option>
+            <option value='Completed'>Completed</option>
+          </select>
+        </div>
+      ) : null}
     </form>
   );
 };
