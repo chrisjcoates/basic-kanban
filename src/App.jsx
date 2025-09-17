@@ -17,7 +17,7 @@ const App = () => {
   });
 
   const openTaskModal = () => {
-    isUtilityModalOpen && closeUtilityModal();
+    isUtilityModalOpen && setIsUtilityModalOpen((prev) => (prev = false));
 
     if (openTaskId) {
       const selectedTask = tasks.filter((task) => task.id === openTaskId);
@@ -66,6 +66,12 @@ const App = () => {
     closeTaskModal();
   };
 
+  const deleteTask = () => {
+    setTasks(tasks.filter((task) => task.id !== openTaskId));
+
+    closeUtilityModal();
+  };
+
   const openUtilityModal = (task) => {
     setIsUtilityModalOpen((prev) => (prev = true));
     setOpentaskId((prev) => (prev = task.id));
@@ -73,6 +79,7 @@ const App = () => {
 
   const closeUtilityModal = () => {
     setIsUtilityModalOpen((prev) => (prev = false));
+    setOpentaskId((prev) => (prev = 0));
   };
 
   return (
@@ -142,7 +149,7 @@ const App = () => {
 
       {/* Task Modal */}
       <Modal
-        title='New Task'
+        title={openTaskId ? 'Edit task' : 'New Task'}
         isOpen={isModalOpen}
         closeModal={closeTaskModal}
         onSubmit={onModalSubmit}
@@ -155,7 +162,12 @@ const App = () => {
       </Modal>
 
       {/* Utility Modal */}
-      <UtilityModal isOpen={isUtilityModalOpen} onEditClick={openTaskModal} />
+      <UtilityModal
+        isOpen={isUtilityModalOpen}
+        onEditClick={openTaskModal}
+        onCloseClick={closeUtilityModal}
+        onDeleteClick={deleteTask}
+      />
     </div>
   );
 };
