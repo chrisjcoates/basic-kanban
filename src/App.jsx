@@ -4,10 +4,12 @@ import Modal from './components/Modal';
 import TaskForm from './components/TaskForm';
 import Task from './components/Task';
 import UtilityModal from './components/UtilityModal';
+import ConfirmationModal from './components/ConfirmationModal';
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUtilityModalOpen, setIsUtilityModalOpen] = useState(false);
+  const [isConfimationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [openTaskId, setOpentaskId] = useState(0);
   const [tasks, setTasks] = useState(() => {
     const tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -75,12 +77,12 @@ const App = () => {
 
   const deleteTask = () => {
     setTasks(tasks.filter((task) => task.id !== openTaskId));
-
-    closeUtilityModal();
+    closeConfirmationModal();
   };
 
   const resetKanban = () => {
     setTasks((prev) => (prev = []));
+    setIsConfirmationModalOpen((prev) => (prev = false));
   };
 
   const openUtilityModal = (task) => {
@@ -91,6 +93,19 @@ const App = () => {
   const closeUtilityModal = () => {
     setIsUtilityModalOpen((prev) => (prev = false));
     setOpentaskId((prev) => (prev = 0));
+  };
+
+  const openConfirmationModal = (task) => {
+    setIsConfirmationModalOpen((prev) => (prev = true));
+  };
+
+  const closeConfirmationModal = () => {
+    openTaskId && closeUtilityModal();
+    setIsConfirmationModalOpen((prev) => (prev = false));
+  };
+
+  const cancelConfirmationModal = () => {
+    setIsConfirmationModalOpen((prev) => (prev = false));
   };
 
   return (
@@ -110,7 +125,7 @@ const App = () => {
             tasks.filter((task) => task.status === 'Completed').length
           }/${tasks.length}`}</h2>
           <button
-            onClick={resetKanban}
+            onClick={openConfirmationModal}
             className='bg-red-600 mb-3 py-1 px-3 text-white rounded shadow-lg px-2 hover:bg-red-700 active:bg-red-600 cursor-pointer'
           >
             Reset
@@ -187,7 +202,14 @@ const App = () => {
         isOpen={isUtilityModalOpen}
         onEditClick={openTaskModal}
         onCloseClick={closeUtilityModal}
-        onDeleteClick={deleteTask}
+        onDeleteClick={openConfirmationModal}
+      />
+
+      {/* Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={isConfimationModalOpen}
+        onCancel={cancelConfirmationModal}
+        onConfirm={openTaskId > 0 ? deleteTask : resetKanban}
       />
     </div>
   );
