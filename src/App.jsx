@@ -109,8 +109,8 @@ const App = () => {
   };
 
   return (
-    <div className='max-w-6xl mx-auto mt-10 p-6'>
-      <h1 className='text-center mb-3 font-bold text-4xl text-gray-300'>
+    <div className='max-w-6xl mx-auto mt-3 p-6'>
+      <h1 className='text-center mb-10 font-bold text-4xl text-gray-300'>
         Basic Kanban
       </h1>
       <div className='flex justify-between'>
