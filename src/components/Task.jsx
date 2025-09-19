@@ -17,7 +17,7 @@ const Task = ({ task, onClick, taskId }) => {
       : 'border-l-10';
   return (
     <div
-      className={`p-4 mb-4 rounded-lg shadow-md min-h-30 ${
+      className={`task-slide-up p-4 mb-4 rounded-lg shadow-md min-h-30 ${
         colorClasses[task.status]
       } cursor-pointer ${activeBorder} ${priorityBorderColor[task.priority]}`}
       onClick={onClick}
