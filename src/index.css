@@ -3,3 +3,12 @@
 body {
   background-color: #1e2939;
 }
+
+.task-slide-up {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-slide-up:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
