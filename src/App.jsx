@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Modal from './components/Modal';
 import TaskForm from './components/TaskForm';
@@ -9,12 +9,19 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUtilityModalOpen, setIsUtilityModalOpen] = useState(false);
   const [openTaskId, setOpentaskId] = useState(0);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const tasks = JSON.parse(localStorage.getItem('tasks'));
+    return tasks || [];
+  });
   const [taskData, setTaskData] = useState({
     description: '',
     priority: 'Medium',
     status: 'Backlog',
   });
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const openTaskModal = () => {
     isUtilityModalOpen && setIsUtilityModalOpen((prev) => (prev = false));
